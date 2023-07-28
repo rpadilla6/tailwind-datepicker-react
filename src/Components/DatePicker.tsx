@@ -23,7 +23,7 @@ const DatePicker = ({ children, options, onChange, classNames, show, setShow, se
 	</div>
 )
 
-const DatePickerMain = ({ options: customOptions, children }: { options?: IOptions; children?: ReactElement }) => {
+const DatePickerMain = ({ options: customOptions, children }: { options?: IOptions; children?: ReactElement | ReactNode }) => {
 	const options = { ...defaultOptions, ...customOptions }
 	const { setShow, show } = useContext(DatePickerContext)
 	const InputRef = useRef<HTMLInputElement>(null)
@@ -53,13 +53,7 @@ const DatePickerMain = ({ options: customOptions, children }: { options?: IOptio
 					<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 						<CalendarIcon />
 					</div>
-					<Input
-						ref={InputRef}
-						idProp={options?.inputIdProp}
-						nameProp={options?.inputNameProp}
-						placeholderProp={options?.inputPlaceholderProp}
-						dateFormat={options?.inputDateFormatProp}
-					/>
+					<Input ref={InputRef} idProp={options?.inputIdProp} nameProp={options?.inputNameProp} placeholderProp={options?.inputPlaceholderProp} dateFormat={options?.inputDateFormatProp} />
 				</div>
 			)}
 			{show && <DatePickerPopup ref={DatePickerRef} />}
@@ -67,15 +61,15 @@ const DatePickerMain = ({ options: customOptions, children }: { options?: IOptio
 	)
 }
 
-const Input = forwardRef<HTMLInputElement, { idProp ?: string, nameProp?: string, placeholderProp ?: string, dateFormat?: Intl.DateTimeFormatOptions }>((props, ref) => {
+const Input = forwardRef<HTMLInputElement, { idProp?: string; nameProp?: string; placeholderProp?: string; dateFormat?: Intl.DateTimeFormatOptions }>((props, ref) => {
 	const { setShow, selectedDate, showSelectedDate, options, getFormattedDate } = useContext(DatePickerContext)
-	
-	const nameProp = props.nameProp || "date";
-	const idProp = props.idProp || nameProp;
-	const placeholderProp = props.placeholderProp || "Select Date";
 
-	const format = props.dateFormat || null;
-	
+	const nameProp = props.nameProp || "date"
+	const idProp = props.idProp || nameProp
+	const placeholderProp = props.placeholderProp || "Select Date"
+
+	const format = props.dateFormat || null
+
 	return (
 		<input
 			ref={ref}

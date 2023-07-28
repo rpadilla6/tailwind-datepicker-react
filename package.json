@@ -3,10 +3,9 @@
 	"version": "1.4.1",
 	"description": "A tailwindcss/flowbite datepicker component built as a react component with types",
 	"main": "dist/index.js",
-	"types": "types/index.d.ts",
+	"types": "dist/index.d.ts",
 	"files": [
 		"dist",
-		"types",
 		"package.json",
 		"README.md"
 	],
@@ -18,7 +17,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/OMikkel/tailwind-datepicker-react.git"
+		"url": "git+https://github.com/rpadilla6/tailwind-datepicker-react.git"
 	},
 	"keywords": [
 		"tailwind",

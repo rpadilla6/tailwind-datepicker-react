@@ -37,6 +37,7 @@ const DatePickerPopup = forwardRef<HTMLDivElement>((_props, ref: ForwardedRef<HT
 					{view === "years" && <Years />}
 					{view === "decades" && <Decades />}
 				</div>
+				{options?.btnRow ? options.btnRow() : null}
 				{(options?.todayBtn || options?.clearBtn) && (
 					<div className="flex mt-2 space-x-2">
 						{options?.todayBtn && <ButtonToday />}

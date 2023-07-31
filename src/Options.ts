@@ -24,6 +24,7 @@ export interface IOptions {
 	todayBtnText?: string
 	clearBtn?: boolean
 	clearBtnText?: string
+	btnRow?: () => ReactElement | JSX.Element
 	maxDate?: Date
 	minDate?: Date
 	theme?: ITheme
@@ -67,7 +68,7 @@ const options: IOptions = {
 		day: "numeric",
 		month: "long",
 		year: "numeric",
-	}
+	},
 }
 
 export default options

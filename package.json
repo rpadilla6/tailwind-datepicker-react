@@ -1,6 +1,6 @@
 {
 	"name": "tailwind-datepicker-react",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"description": "A tailwindcss/flowbite datepicker component built as a react component with types",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -32,9 +32,9 @@
 	"author": "OMikkel",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/OMikkel/tailwind-datepicker-react/issues"
+		"url": "https://github.com/rpadilla6/tailwind-datepicker-react/issues"
 	},
-	"homepage": "https://github.com/OMikkel/tailwind-datepicker-react#readme",
+	"homepage": "https://github.com/rpadilla6/tailwind-datepicker-react#readme",
 	"peerDependencies": {
 		"react": ">=17",
 		"react-dom": ">=17",

@@ -21,6 +21,7 @@ export interface IOptions {
     todayBtnText?: string;
     clearBtn?: boolean;
     clearBtnText?: string;
+    btnRow?: () => ReactElement | JSX.Element;
     maxDate?: Date;
     minDate?: Date;
     theme?: ITheme;

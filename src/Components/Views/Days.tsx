@@ -9,10 +9,10 @@ interface IDaysProps {
 
 const Days = ({ start }: IDaysProps) => {
 	const { selectedDate, changeSelectedDate, showSelectedDate, getFormattedDate, options } = useContext(DatePickerContext)
-	
-	const startOfWeek = (new Date(start).getDay() + 6) % 7;
-	const weekDays = options.weekDays || [];
-	const sortedWeekDays = weekDays.slice(startOfWeek).concat(weekDays.slice(0, startOfWeek));
+
+	const startOfWeek = (new Date(start).getDay() + 6) % 7
+	const weekDays = options.weekDays || []
+	const sortedWeekDays = weekDays.slice(startOfWeek).concat(weekDays.slice(0, startOfWeek))
 
 	return (
 		<>
@@ -30,18 +30,24 @@ const Days = ({ start }: IDaysProps) => {
 					const month = getFormattedDate(current, { month: "long" })
 					const year = getFormattedDate(current, { year: "numeric" })
 					return (
-						<span
+						<button
 							key={index}
-							className={`hover:bg-gray-100 dark:hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center  dark:text-white font-semibold text-sm ${
+							className={`hover:bg-gray-100 dark:hover:bg-gray-600 focus:bg-gray-100 outline-none block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center  dark:text-white font-semibold text-sm ${
 								showSelectedDate && selectedDate.getTime() > 0 && getFormattedDate(selectedDate) === getFormattedDate(current)
-									? twMerge("bg-blue-700 text-white hover:bg-blue-600", options?.theme?.selected)
-									: ""
+									? twMerge("bg-blue-700 text-white hover:!bg-blue-600 focus:bg-blue-600", options?.theme?.selected)
+									: "hover:bg-gray-100 dark:hover:bg-gray-600 focus:bg-gray-100"
 							} ${
 								month == getFormattedDate(selectedDate, { month: "long" }) && year == getFormattedDate(selectedDate, { year: "numeric" })
 									? twMerge("text-gray-900", options?.theme?.text)
 									: twMerge("text-gray-500", options?.theme?.disabledText)
-							} ${(options?.minDate && new Date(current) < options?.minDate) || (options?.disabledDates && options.disabledDates.indexOf(new Date(current)) >= 0) ? twMerge("text-gray-500", options?.theme?.disabledText) : ""} ${
-								(options?.maxDate && new Date(current) > options?.maxDate) || (options?.disabledDates && options.disabledDates.indexOf(new Date(current)) >= 0) ? twMerge("text-gray-500", options?.theme?.disabledText) : ""
+							} ${
+								(options?.minDate && new Date(current) < options?.minDate) || (options?.disabledDates && options.disabledDates.indexOf(new Date(current)) >= 0)
+									? twMerge("text-gray-500", options?.theme?.disabledText)
+									: ""
+							} ${
+								(options?.maxDate && new Date(current) > options?.maxDate) || (options?.disabledDates && options.disabledDates.indexOf(new Date(current)) >= 0)
+									? twMerge("text-gray-500", options?.theme?.disabledText)
+									: ""
 							}
                             `}
 							onClick={() => {
@@ -49,7 +55,7 @@ const Days = ({ start }: IDaysProps) => {
 							}}
 						>
 							{day}
-						</span>
+						</button>
 					)
 				})}
 			</div>

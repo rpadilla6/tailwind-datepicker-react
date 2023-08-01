@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { addMonths } from "../../Utils/date"
 import { DatePickerContext } from "../DatePickerProvider"
 import { twMerge } from "tailwind-merge"
+import { menuButtons, shared } from "../../config/styles"
 
 const Months = () => {
 	const { selectedDate, showSelectedDate, changeSelectedDate, getFormattedDate, setView, options } = useContext(DatePickerContext)
@@ -10,20 +11,21 @@ const Months = () => {
 			{[...Array(12)].map((_month, index) => {
 				const month = getFormattedDate(new Date(selectedDate.getFullYear(), index), { month: "short" })
 				return (
-					<span
+					<button
 						key={index}
-						className={`hover:bg-gray-100 dark:hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center  dark:text-white font-semibold text-sm text-gray-900 ${
+						aria-label={month}
+						className={`${menuButtons.default} ${
 							showSelectedDate && selectedDate.getTime() > 0 && getFormattedDate(selectedDate, { month: "short" }) === month
-								? twMerge("bg-blue-700 text-white hover:bg-blue-600", options?.theme?.selected)
-								: ""
-						} ${twMerge(options?.theme?.text)}`}
+								? twMerge(menuButtons.selected, options?.theme?.selected)
+								: menuButtons.unselected
+						} ${twMerge(shared.text, options?.theme?.text)}`}
 						onClick={() => {
 							changeSelectedDate("date", new Date(addMonths(selectedDate, index - selectedDate.getMonth())))
 							setView("days")
 						}}
 					>
 						{month}
-					</span>
+					</button>
 				)
 			})}
 		</div>

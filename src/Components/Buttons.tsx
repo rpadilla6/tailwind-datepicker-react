@@ -3,17 +3,12 @@ import { twMerge } from "tailwind-merge"
 import { goToPrevNext, startOfYearPeriod } from "../Utils/date"
 import { DatePickerContext, Views } from "./DatePickerProvider"
 
+const defaultButtonClassNames =
+	"bg-white dark:bg-dark-gray-900 rounded-lg text-gray-500 dark:text-dark-gray-25 hover:bg-gray-200 dark:hover:bg-dark-gray-700 hover:text-gray-900 dark:hover:text-dark-gray-25 text-base text-gray-700 dark:text-dark-gray-100 font-semibold p-2.5 focus:outline-none focus:bg-gray-100 focus:dark:bg-dark-gray-800"
 export const ButtonPrevMonth = () => {
 	const { selectedDate, changeSelectedDate, view, options } = useContext(DatePickerContext)
 	return (
-		<button
-			type="button"
-			className={twMerge(
-				"bg-white dark:bg-gray-700 rounded-lg text-gray-500 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white text-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-gray-200",
-				options?.theme?.icons
-			)}
-			onClick={() => changeSelectedDate("prev", new Date(goToPrevNext(view, selectedDate, -1)))}
-		>
+		<button type="button" className={twMerge(defaultButtonClassNames, options?.theme?.icons)} onClick={() => changeSelectedDate("prev", new Date(goToPrevNext(view, selectedDate, -1)))}>
 			{options?.icons?.prev ? (
 				options?.icons?.prev()
 			) : (
@@ -36,14 +31,7 @@ export const ButtonSelectMonth = () => {
 	}
 
 	return (
-		<button
-			type="button"
-			className={twMerge(
-				"text-sm rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700 font-semibold py-2.5 px-5 hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-200",
-				options?.theme?.icons
-			)}
-			onClick={() => setView(calculateView())}
-		>
+		<button type="button" className={twMerge(defaultButtonClassNames, options?.theme?.icons)} onClick={() => setView(calculateView())}>
 			{view === "days" && getFormattedDate(selectedDate, { month: "long", year: "numeric" })}
 			{view === "months" && getFormattedDate(selectedDate, { year: "numeric" })}
 			{view === "years" && `${startOfYearPeriod(selectedDate, 10)}-${startOfYearPeriod(selectedDate, 10) + 9}`}
@@ -55,14 +43,7 @@ export const ButtonSelectMonth = () => {
 export const ButtonNextMonth = () => {
 	const { selectedDate, changeSelectedDate, view, options } = useContext(DatePickerContext)
 	return (
-		<button
-			type="button"
-			className={twMerge(
-				"bg-white dark:bg-gray-700 rounded-lg text-gray-500 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white text-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-gray-200",
-				options?.theme?.icons
-			)}
-			onClick={() => changeSelectedDate("next", new Date(goToPrevNext(view, selectedDate, 1)))}
-		>
+		<button type="button" className={twMerge(defaultButtonClassNames, options?.theme?.icons)} onClick={() => changeSelectedDate("next", new Date(goToPrevNext(view, selectedDate, 1)))}>
 			{options?.icons?.next ? (
 				options?.icons?.next()
 			) : (

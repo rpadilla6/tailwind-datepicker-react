@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { addYears, startOfYearPeriod } from "../../Utils/date"
 import { DatePickerContext } from "../DatePickerProvider"
 import { twMerge } from "tailwind-merge"
+import { menuButtons, shared } from "../../config/styles"
 
 const Years = () => {
 	const { selectedDate, showSelectedDate, changeSelectedDate, setView, getFormattedDate, options } = useContext(DatePickerContext)
@@ -11,20 +12,21 @@ const Years = () => {
 				const first = startOfYearPeriod(selectedDate, 10)
 				const year = first - 1 + index * 1
 				return (
-					<span
+					<button
+						aria-label={`${year}`}
 						key={index}
-						className={`hover:bg-gray-100 dark:hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center  dark:text-white font-semibold text-sm ${
+						className={`${menuButtons.default} ${
 							showSelectedDate && selectedDate.getTime() > 0 && Number(getFormattedDate(selectedDate, { year: "numeric" })) === year
-								? twMerge("bg-blue-700 text-white hover:bg-blue-600", options?.theme?.selected)
-								: ""
-						} ${index == 0 || index == 11 ? twMerge("text-gray-500", options?.theme?.disabledText) : twMerge("text-gray-900", options?.theme?.text)}`}
+								? twMerge(menuButtons.selected, options?.theme?.selected)
+								: menuButtons.unselected
+						} ${index == 0 || index == 11 ? twMerge(shared.disabled, options?.theme?.disabledText) : twMerge(shared.text, options?.theme?.text)}`}
 						onClick={() => {
 							changeSelectedDate("date", new Date(addYears(selectedDate, year - selectedDate.getFullYear())))
 							setView("months")
 						}}
 					>
 						{year}
-					</span>
+					</button>
 				)
 			})}
 		</div>

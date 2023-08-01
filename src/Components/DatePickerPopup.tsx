@@ -22,7 +22,7 @@ const DatePickerPopup = forwardRef<HTMLDivElement>((_props, ref: ForwardedRef<HT
 
 	return (
 		<div ref={ref} className={twMerge("absolute z-50 block pt-2 top-10", options?.datepickerClassNames)}>
-			<div className={twMerge("inline-block p-4 bg-white rounded-lg shadow-lg dark:bg-gray-700", options?.theme?.background)}>
+			<div className={twMerge("inline-block p-4 bg-white rounded-lg shadow-lg dark:bg-dark-gray-900", options?.theme?.background)}>
 				<div>
 					{options?.title && <div className={twMerge("px-2 py-3 font-semibold text-center text-gray-900 dark:text-white", options?.theme?.text)}>{options?.title}</div>}
 					<div className="flex justify-between mb-2">

@@ -27,7 +27,7 @@ export interface IOptions {
 	btnRow?: () => ReactElement | JSX.Element
 	maxDate?: Date
 	minDate?: Date
-	theme?: ITheme
+	theme?: Partial<ITheme>
 	icons?: IIcons
 	datepickerClassNames?: string
 	defaultDate?: Date | null

@@ -8,7 +8,7 @@ import Decades from "./Views/Decades"
 import Months from "./Views/Months"
 import Years from "./Views/Years"
 
-const DatePickerPopup = forwardRef<HTMLDivElement>((_props, ref: ForwardedRef<HTMLDivElement>) => {
+const DatePickerPopup = forwardRef<HTMLDivElement, { style?: React.CSSProperties }>((_props, ref: ForwardedRef<HTMLDivElement>) => {
 	const { selectedMonth, selectedYear, view, options } = useContext(DatePickerContext)
 
 	const language = options?.language ? options?.language : "en"
@@ -21,7 +21,7 @@ const DatePickerPopup = forwardRef<HTMLDivElement>((_props, ref: ForwardedRef<HT
 	const start = dayOfTheWeekOf(firstOfMonth, weekStart, weekStart)
 
 	return (
-		<div ref={ref} className={twMerge("absolute z-50 block pt-2 top-10", options?.datepickerClassNames)}>
+		<div ref={ref} className={twMerge("absolute z-50 block pt-2 top-10", options?.datepickerClassNames)} style={_props.style}>
 			<div className={twMerge("inline-block p-4 bg-white rounded-lg shadow-lg dark:bg-dark-gray-900", options?.theme?.background)}>
 				<div>
 					{options?.title && <div className={twMerge("px-2 py-3 font-semibold text-center text-gray-900 dark:text-white", options?.theme?.text)}>{options?.title}</div>}

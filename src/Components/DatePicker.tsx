@@ -23,7 +23,7 @@ const DatePicker = ({ children, options, onChange, classNames, show, setShow, se
 	</div>
 )
 
-const DatePickerMain = ({ options: customOptions, children }: { options?: IOptions; children?: ReactElement | ReactNode }) => {
+const DatePickerMain = forwardRef<HTMLDivElement, { options?: IOptions; children?: ReactElement | ReactNode }>(({ options: customOptions, children }, ref) => {
 	const options = { ...defaultOptions, ...customOptions }
 	const { setShow, show } = useContext(DatePickerContext)
 	const InputRef = useRef<HTMLInputElement>(null)
@@ -56,10 +56,11 @@ const DatePickerMain = ({ options: customOptions, children }: { options?: IOptio
 					<Input ref={InputRef} idProp={options?.inputIdProp} nameProp={options?.inputNameProp} placeholderProp={options?.inputPlaceholderProp} dateFormat={options?.inputDateFormatProp} />
 				</div>
 			)}
-			{show && <DatePickerPopup ref={DatePickerRef} />}
+			{show && <DatePickerPopup ref={ref ?? DatePickerRef} />}
 		</>
 	)
-}
+})
+DatePickerMain.displayName = "DatePickerMain"
 
 const Input = forwardRef<HTMLInputElement, { idProp?: string; nameProp?: string; placeholderProp?: string; dateFormat?: Intl.DateTimeFormatOptions }>((props, ref) => {
 	const { setShow, selectedDate, showSelectedDate, options, getFormattedDate } = useContext(DatePickerContext)

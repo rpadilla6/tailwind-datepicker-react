@@ -15,13 +15,16 @@ export interface IDatePickerProps {
 	selectedDateState?: [Date, (date: Date) => void]
 }
 
-const DatePicker = ({ children, options, onChange, classNames, show, setShow, selectedDateState }: IDatePickerProps) => (
+const DatePicker = forwardRef<HTMLDivElement, IDatePickerProps>(({ children, options, onChange, classNames, show, setShow, selectedDateState }, ref) => (
 	<div className={twMerge("w-full", classNames)}>
 		<DatePickerProvider options={options} onChange={onChange} show={show} setShow={setShow} selectedDateState={selectedDateState}>
-			<DatePickerMain options={options}>{children}</DatePickerMain>
+			<DatePickerMain options={options} ref={ref}>
+				{children}
+			</DatePickerMain>
 		</DatePickerProvider>
 	</div>
-)
+))
+DatePicker.displayName = "DatePicker"
 
 const DatePickerMain = forwardRef<HTMLDivElement, { options?: IOptions; children?: ReactElement | ReactNode }>(({ options: customOptions, children }, ref) => {
 	const options = { ...defaultOptions, ...customOptions }

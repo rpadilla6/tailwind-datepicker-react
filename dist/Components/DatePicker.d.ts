@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { IOptions } from "../Options";
 export interface IDatePickerProps {
     children?: ReactElement | ReactNode;
@@ -8,7 +8,8 @@ export interface IDatePickerProps {
     setShow: (show: boolean) => void;
     classNames?: string;
     selectedDateState?: [Date, (date: Date) => void];
+    style?: React.CSSProperties;
 }
-declare const DatePicker: ({ children, options, onChange, classNames, show, setShow, selectedDateState }: IDatePickerProps) => JSX.Element;
+declare const DatePicker: React.ForwardRefExoticComponent<IDatePickerProps & React.RefAttributes<HTMLDivElement>>;
 export default DatePicker;
 //# sourceMappingURL=DatePicker.d.ts.map

@@ -13,12 +13,13 @@ export interface IDatePickerProps {
 	setShow: (show: boolean) => void
 	classNames?: string
 	selectedDateState?: [Date, (date: Date) => void]
+	style?: React.CSSProperties
 }
 
-const DatePicker = forwardRef<HTMLDivElement, IDatePickerProps>(({ children, options, onChange, classNames, show, setShow, selectedDateState }, ref) => (
+const DatePicker = forwardRef<HTMLDivElement, IDatePickerProps>(({ children, style, options, onChange, classNames, show, setShow, selectedDateState }, ref) => (
 	<div className={twMerge("w-full", classNames)}>
 		<DatePickerProvider options={options} onChange={onChange} show={show} setShow={setShow} selectedDateState={selectedDateState}>
-			<DatePickerMain options={options} ref={ref}>
+			<DatePickerMain options={options} ref={ref} style={style}>
 				{children}
 			</DatePickerMain>
 		</DatePickerProvider>
@@ -26,7 +27,7 @@ const DatePicker = forwardRef<HTMLDivElement, IDatePickerProps>(({ children, opt
 ))
 DatePicker.displayName = "DatePicker"
 
-const DatePickerMain = forwardRef<HTMLDivElement, { options?: IOptions; children?: ReactElement | ReactNode }>(({ options: customOptions, children }, ref) => {
+const DatePickerMain = forwardRef<HTMLDivElement, { options?: IOptions; children?: ReactElement | ReactNode; style?: React.CSSProperties }>(({ options: customOptions, children, style }, ref) => {
 	const options = { ...defaultOptions, ...customOptions }
 	const { setShow, show } = useContext(DatePickerContext)
 	const InputRef = useRef<HTMLInputElement>(null)
@@ -59,7 +60,7 @@ const DatePickerMain = forwardRef<HTMLDivElement, { options?: IOptions; children
 					<Input ref={InputRef} idProp={options?.inputIdProp} nameProp={options?.inputNameProp} placeholderProp={options?.inputPlaceholderProp} dateFormat={options?.inputDateFormatProp} />
 				</div>
 			)}
-			{show && <DatePickerPopup ref={ref ?? DatePickerRef} />}
+			{show && <DatePickerPopup ref={ref ?? DatePickerRef} style={style} />}
 		</>
 	)
 })

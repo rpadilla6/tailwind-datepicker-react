@@ -60,7 +60,7 @@ const DatePickerMain = forwardRef<HTMLDivElement, { options?: IOptions; children
 					<Input ref={InputRef} idProp={options?.inputIdProp} nameProp={options?.inputNameProp} placeholderProp={options?.inputPlaceholderProp} dateFormat={options?.inputDateFormatProp} />
 				</div>
 			)}
-			{show && <DatePickerPopup ref={ref ?? DatePickerRef} style={style} />}
+			{show && <DatePickerPopup ref={ref} style={style} />}
 		</>
 	)
 })

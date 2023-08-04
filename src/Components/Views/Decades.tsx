@@ -14,6 +14,7 @@ const Decades = () => {
 				return (
 					<button
 						key={index}
+						type="button"
 						aria-label={`${year}`}
 						className={`${menuButtons.default} ${
 							showSelectedDate && selectedDate.getTime() > 0 && Number(getFormattedDate(selectedDate, { year: "numeric" })) === year

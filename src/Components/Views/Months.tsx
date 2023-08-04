@@ -13,6 +13,7 @@ const Months = () => {
 				return (
 					<button
 						key={index}
+						type="button"
 						aria-label={month}
 						className={`${menuButtons.default} ${
 							showSelectedDate && selectedDate.getTime() > 0 && getFormattedDate(selectedDate, { month: "short" }) === month

@@ -35,6 +35,7 @@ const Days = ({ start }: IDaysProps) => {
 					return (
 						<button
 							key={index}
+							type="button"
 							aria-label={day}
 							className={`bg-white dark:bg-dark-gray-900 outline-none block flex-1 leading-9 border-0 rounded-full text-center font-normal [font-size:14px] ${
 								showSelectedDate && selectedDate.getTime() > 0 && getFormattedDate(selectedDate) === getFormattedDate(current) ? twMerge(defaultSelected, options?.theme?.selected) : defaultFocused

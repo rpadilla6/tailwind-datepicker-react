@@ -13,6 +13,7 @@ const Years = () => {
 				const year = first - 1 + index * 1
 				return (
 					<button
+						type="button"
 						aria-label={`${year}`}
 						key={index}
 						className={`${menuButtons.default} ${

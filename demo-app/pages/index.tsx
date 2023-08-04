@@ -6,20 +6,12 @@ import ThemeSelector from "../components/ThemeSelector"
 const Home: NextPage = () => {
 	const [show, setShow] = useState<boolean>(false)
 	const options: IOptions = {
-		autoHide: false,
-		btnRow: () => (
-			<div className="flex space-x-2">
-				<button onClick={() => setShow(false)}>No</button>
-				<button onClick={() => setShow(true)}>OK</button>
-			</div>
-		),
-		todayBtn: false,
-		clearBtn: false,
 		inputDateFormatProp: {
 			day: "2-digit",
 			month: "2-digit",
 			year: "numeric",
 		},
+		minDate: new Date(),
 		theme: {
 			background: "",
 			todayBtn: "",

@@ -31,27 +31,22 @@ const Days = ({ start }: IDaysProps) => {
 					const month = getFormattedDate(current, { month: "long" })
 					const year = getFormattedDate(current, { year: "numeric" })
 					const defaultFocused = "hover:bg-blue-50 dark:hover:bg-dark-gray-700 focus:bg-blue-50 focus:dark:bg-dark-gray-700 hover:text-blue-600 focus:text-blue-600 "
-					const defaultSelected = "bg-blue-600 !text-white dark:!text-dark-gray-900 hover:bg-blue-700 focus:bg-blue-700 hover:dark:bg-blue-400 focus:dark:bg-blue-400 dark:!bg-blue-300"
+					const defaultSelected = "!bg-blue-600 !text-white dark:!text-dark-gray-900 hover:bg-blue-700 focus:bg-blue-700 hover:dark:bg-blue-400 focus:dark:bg-blue-400 dark:!bg-blue-300"
+					const disabledMin = (options?.minDate && new Date(current) < options?.minDate) || (options?.disabledDates && options.disabledDates.indexOf(new Date(current)) >= 0)
+					const disabledMax = (options?.maxDate && new Date(current) > options?.maxDate) || (options?.disabledDates && options.disabledDates.indexOf(new Date(current)) >= 0)
 					return (
 						<button
 							key={index}
 							type="button"
 							aria-label={day}
+							disabled={disabledMin || disabledMax}
 							className={`bg-white dark:bg-dark-gray-900 outline-none block flex-1 leading-9 border-0 rounded-full text-center font-normal [font-size:14px] ${
 								showSelectedDate && selectedDate.getTime() > 0 && getFormattedDate(selectedDate) === getFormattedDate(current) ? twMerge(defaultSelected, options?.theme?.selected) : defaultFocused
 							} ${
 								month == getFormattedDate(selectedDate, { month: "long" }) && year == getFormattedDate(selectedDate, { year: "numeric" })
 									? twMerge(shared.text, options?.theme?.text)
 									: twMerge(shared.disabled, options?.theme?.disabledText)
-							} ${
-								(options?.minDate && new Date(current) < options?.minDate) || (options?.disabledDates && options.disabledDates.indexOf(new Date(current)) >= 0)
-									? twMerge(shared.disabled, options?.theme?.disabledText)
-									: ""
-							} ${
-								(options?.maxDate && new Date(current) > options?.maxDate) || (options?.disabledDates && options.disabledDates.indexOf(new Date(current)) >= 0)
-									? twMerge(shared.disabled, options?.theme?.disabledText)
-									: ""
-							}
+							} ${disabledMin ? twMerge(shared.disabled, options?.theme?.disabledText) : ""} ${disabledMax ? twMerge(shared.disabled, options?.theme?.disabledText) : ""}
                             `}
 							onClick={() => {
 								changeSelectedDate("date", new Date(current))

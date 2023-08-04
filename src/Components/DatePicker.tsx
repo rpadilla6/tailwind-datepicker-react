@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactElement, useContext, useEffect, useRef, ReactNode } from "react"
+import React, { forwardRef, ReactElement, useContext, useEffect, useRef, ReactNode, Dispatch, SetStateAction } from "react"
 import { twMerge } from "tailwind-merge"
 import { IOptions } from "../Options"
 import defaultOptions from "../Options"
@@ -13,12 +13,13 @@ export interface IDatePickerProps {
 	setShow: (show: boolean) => void
 	classNames?: string
 	selectedDateState?: [Date, (date: Date) => void]
+	showSelecteDateState?: [boolean, Dispatch<SetStateAction<boolean>>]
 	style?: React.CSSProperties
 }
 
-const DatePicker = forwardRef<HTMLDivElement, IDatePickerProps>(({ children, style, options, onChange, classNames, show, setShow, selectedDateState }, ref) => (
+const DatePicker = forwardRef<HTMLDivElement, IDatePickerProps>(({ children, style, options, onChange, classNames, show, setShow, selectedDateState, showSelecteDateState }, ref) => (
 	<div className={twMerge("w-full", classNames)}>
-		<DatePickerProvider options={options} onChange={onChange} show={show} setShow={setShow} selectedDateState={selectedDateState}>
+		<DatePickerProvider options={options} onChange={onChange} show={show} setShow={setShow} selectedDateState={selectedDateState} showSelecteDateState={showSelecteDateState}>
 			<DatePickerMain options={options} ref={ref} style={style}>
 				{children}
 			</DatePickerMain>

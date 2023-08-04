@@ -23,7 +23,8 @@ interface IDatePickerProviderProps {
     show: boolean;
     setShow: (show: boolean) => void;
     selectedDateState?: [Date, (date: Date) => void];
+    showSelecteDateState?: [boolean, Dispatch<SetStateAction<boolean>>];
 }
-declare const DatePickerProvider: ({ children, options: customOptions, onChange, show, setShow, selectedDateState }: IDatePickerProviderProps) => JSX.Element;
+declare const DatePickerProvider: ({ children, options: customOptions, onChange, show, setShow, selectedDateState, showSelecteDateState }: IDatePickerProviderProps) => JSX.Element;
 export default DatePickerProvider;
 //# sourceMappingURL=DatePickerProvider.d.ts.map
